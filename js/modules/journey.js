@@ -26,10 +26,10 @@ export function renderJourney(container, detailPanel, steps) {
 
       card.innerHTML = `
         <div class="journey-step-icon" style="background-color: ${isFirst ? 'var(--color-saffron)' : 'var(--color-navy)'};">
-          <i class="${step.icon}"></i>
+          <span class="material-icons-outlined" style="color: white; font-size: 1.5rem;">${step.icon}</span>
         </div>
         <h3 class="mm-card-title" style="font-size: 1rem; margin-bottom: 0.5rem; color: ${isFirst ? 'var(--color-navy)' : 'var(--color-ink)'};">
-          <span style="color: var(--color-saffron); font-size: 0.8rem; display: block; margin-bottom: 0.2rem; text-transform: uppercase;">STAGE ${stepNumber}</span>
+          <span style="color: var(--color-saffron-dark); font-size: 0.8rem; display: block; margin-bottom: 0.2rem; text-transform: uppercase;">STAGE ${stepNumber}</span>
           ${step.title}
         </h3>
         <p class="mm-text-muted" style="font-size: 0.75rem;">${step.tagline}</p>

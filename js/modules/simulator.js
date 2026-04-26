@@ -156,7 +156,7 @@ export function renderSimulator(root) {
       return `
         <div style="text-align: center; padding: 1rem 0;">
           <div style="font-size: 3.5rem; color: var(--color-primary); margin-bottom: 1.5rem;" aria-hidden="true">
-            <i class="fa-solid fa-circle-check"></i>
+            <span class="material-icons-outlined" style="font-size: inherit;">check_circle</span>
           </div>
           <h3 style="font-weight: 800; color: var(--color-primary); font-size: 1.5rem; margin-bottom: 0.75rem;">Vote Successfully Cast</h3>
           <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Your vote for <strong>${escapeHTML(picked.name)}</strong> is now recorded on the EVM and the paper slip is sealed inside the VVPAT box.</p>
@@ -176,7 +176,7 @@ export function renderSimulator(root) {
     mismatch: () => `
       <div style="text-align: center; padding: 1rem 0;">
         <div style="font-size: 3.5rem; color: #d97706; margin-bottom: 1.5rem;" aria-hidden="true">
-          <i class="fa-solid fa-triangle-exclamation"></i>
+          <span class="material-icons-outlined" style="font-size: inherit;">warning</span>
         </div>
         <h3 style="font-weight: 800; color: #d97706; font-size: 1.5rem; margin-bottom: 0.75rem;">Report to Presiding Officer</h3>
         <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">If the VVPAT slip does not match your choice, you have the right to complain to the Presiding Officer under <strong>Rule 49MA</strong>.</p>

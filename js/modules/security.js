@@ -44,7 +44,7 @@ export function renderSecurity(root, items) {
   const renderSidebar = () => {
     sidebar.innerHTML = items.map((item, index) => `
       <button class="mm-sidebar-item ${index === activeIndex ? 'active' : ''}" data-index="${index}">
-        <div class="sidebar-icon"><i class="${item.icon}"></i></div>
+        <div class="sidebar-icon"><span class="material-icons-outlined" style="font-size: 1.25rem;">${item.icon}</span></div>
         <div style="font-weight: 700; color: ${index === activeIndex ? 'var(--color-primary)' : 'rgba(0, 0, 128, 0.8)'};">${escapeHTML(item.title)}</div>
       </button>
     `).join('');
