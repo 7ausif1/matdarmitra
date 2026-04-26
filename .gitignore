@@ -1,0 +1,17 @@
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Project specific
+.gemini/
+builder-skills/
+
+# Build and deploy
+node_modules/
+.dockerignore
