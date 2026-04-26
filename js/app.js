@@ -8,6 +8,7 @@ import { renderSecurity } from './modules/security.js';
 import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
 import { initMaps } from './modules/maps.js';
+import { initTranslator } from './modules/translator.js';
 
 // Maps key remains for immediate visual demo
 const GOOGLE_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
@@ -18,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
   initMobileMenu();
   loadApplicationData();
+  initTranslator(); // Initialize the Gemini Translator
 });
 
 async function loadApplicationData() {
