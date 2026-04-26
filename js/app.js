@@ -10,7 +10,7 @@ import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  gsap.registerPlugin(ScrollTrigger);
+
   initStickyHeader();
   initMobileMenu();
   loadApplicationData();
@@ -55,44 +55,14 @@ async function loadApplicationData() {
       renderAssistant(assistantContainer);
     }
     // Re-initialize scroll animations now that dynamic content is in the DOM
-    initScrollAnimations();
+
     
   } catch (err) {
     console.error("Failed to load application data:", err);
   }
 }
 
-/**
- * Initialize Intersection Observer for scroll animations
- */
-function initScrollAnimations() {
-  const elementsToAnimate = document.querySelectorAll('.animate-on-scroll');
 
-  // Check if IntersectionObserver is supported
-  if (!('IntersectionObserver' in window)) {
-    elementsToAnimate.forEach(el => el.classList.add('is-visible'));
-    return;
-  }
-
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15 // Trigger when 15% of the element is visible
-  };
-
-  const observer = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target); // Only animate once
-      }
-    });
-  }, observerOptions);
-
-  elementsToAnimate.forEach(el => {
-    observer.observe(el);
-  });
-}
 
 /**
  * Handle sticky header visual changes on scroll
