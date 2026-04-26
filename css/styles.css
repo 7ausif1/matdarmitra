@@ -3,7 +3,7 @@
    ========================================================================== */
 :root {
   --color-primary: #000080; /* Primary Blue */
-  --color-secondary: #FF9933; /* Secondary Orange */
+  --color-secondary: #c76401ff; /* Secondary Orange */
   --color-saffron: var(--color-secondary);
   --color-navy: var(--color-primary);
   --color-saffron-light: rgba(255, 153, 51, 0.1);
