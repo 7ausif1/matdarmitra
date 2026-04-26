@@ -11,6 +11,8 @@
   --color-green-light: rgba(19, 136, 8, 0.1);
   --color-navy-light: rgba(0, 0, 128, 0.1);
   --color-ink: #1a1a1a;
+  --color-text-muted: #4a5568;
+  --color-saffron-dark: #b35900;
   --color-white: #ffffff;
   --color-paper: #f8fafc;
   --color-border: rgba(0, 0, 128, 0.2);
@@ -294,7 +296,7 @@ p {
               radial-gradient(circle at 50% 80%, rgba(0, 0, 128, 0.1), transparent 60%),
               rgba(250, 250, 250, 1);
   background-size: 200% 200%;
-  animation: heroGradientMesh 20s ease infinite alternate;
+
   filter: blur(40px);
   transform: scale(1.2);
 }
@@ -314,17 +316,7 @@ p {
   z-index: 2;
 }
 
-@keyframes heroGradientMesh {
-  0% { background-position: 0% 0%; }
-  50% { background-position: 100% 100%; }
-  100% { background-position: 0% 100%; }
-}
 
-@keyframes printSlip {
-  0% { transform: translateY(-100%); opacity: 0; }
-  10% { transform: translateY(-80%); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
-}
 
 /* ==========================================================================
    JOURNEY ROW GRID (Option 4)
@@ -400,7 +392,7 @@ p {
   margin-top: 2rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-glass);
-  animation: fadeIn 0.4s ease;
+
 }
 
 .journey-detail-header {
@@ -469,11 +461,7 @@ p {
   font-style: italic;
 }
 
-@keyframes gradientMesh {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+
 
 .hero-content {
   display: grid;
@@ -500,18 +488,7 @@ p {
   gap: 1rem;
 }
 
-.hero-image-wrapper {
-  position: relative;
-  border-radius: 1.5rem;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-  transform: perspective(1000px) rotateY(-5deg);
-  transition: transform 0.5s ease;
-}
 
-.hero-image-wrapper:hover {
-  transform: perspective(1000px) rotateY(0deg);
-}
 
 /* ==========================================================================
    Components: Features/Cards
@@ -526,47 +503,7 @@ p {
   margin-bottom: 4rem;
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
 
-.feature-card {
-  padding: 2.5rem;
-  border-radius: 1rem;
-  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
-}
-
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-lg);
-}
-
-.feature-icon {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.75rem;
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  color: var(--color-white);
-}
-
-.icon-saffron { background-color: var(--color-saffron); }
-.icon-green { background-color: var(--color-green); }
-.icon-navy { background-color: var(--color-navy); }
-
-.feature-card h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.feature-card p {
-  color: #4a5568;
-}
 
 /* ==========================================================================
    Footer
@@ -578,21 +515,7 @@ p {
   text-align: center;
 }
 
-.footer-content {
-  margin-bottom: 2rem;
-}
 
-.footer-brand {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.footer-text {
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 600px;
-  margin: 0 auto;
-}
 
 .footer-bottom {
   padding-top: 2rem;
@@ -626,33 +549,21 @@ p {
   margin-bottom: 1rem;
 }
 
-.mm-badge {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-navy);
-  background-color: var(--color-saffron-light);
-  padding: 0.25rem 0.75rem;
-  border-radius: 9999px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
+
 
 .mm-text-muted {
-  color: #718096;
+  color: var(--color-text-muted);
   font-size: 0.875rem;
 }
 
-.mm-list {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-  color: #4a5568;
-  margin-bottom: 1rem;
+.journey-source {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-top: 1.5rem;
+  font-style: italic;
 }
 
-.mm-list li {
-  margin-bottom: 0.5rem;
-}
+
 
 /* Quiz Options */
 .mm-quiz-opt {
@@ -859,19 +770,7 @@ p {
   font-size: 0.875rem;
 }
 
-/* ==========================================================================
-   Animations
-   ========================================================================== */
-.animate-on-scroll {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
 
-.animate-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
 /* ==========================================================================
    Media Queries
@@ -996,13 +895,10 @@ p {
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-md);
   min-height: 400px;
-  animation: fadeIn 0.4s ease;
+
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+
 
 /* ==========================================================================
    Components: Footer

@@ -78,7 +78,7 @@ export function renderAssistant(root) {
         <input id="asst-input" type="text" maxlength="200"
                style="flex: 1; border: 1px solid var(--color-border); padding: 0.75rem 1rem; border-radius: 2rem; font-family: inherit; font-size: 0.875rem; outline: none; transition: border-color 0.2s;"
                placeholder="Type your question here..." />
-        <button id="asst-send" style="background-color: var(--color-navy); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; border: none; outline: none;">
+        <button id="asst-send" aria-label="Send Message" style="background-color: var(--color-navy); color: white; width: 3rem; height: 3rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.2s; border: none; outline: none;">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: -2px;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
         </button>
       </div>
@@ -129,9 +129,9 @@ export function renderAssistant(root) {
     setTimeout(() => {
       const hit = findFAQ(question);
       if (hit) {
-        appendMessage(`<strong>Answer:</strong> ${escapeHTML(hit.a)}<div style="margin-top: 0.5rem; font-size: 0.75rem; color: #718096; border-top: 1px solid var(--color-border); padding-top: 0.5rem;">Source: ECI knowledge base.</div>`, false);
+        appendMessage(`<strong>Answer:</strong> ${escapeHTML(hit.a)}<div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-muted); border-top: 1px solid var(--color-border); padding-top: 0.5rem;">Source: ECI knowledge base.</div>`, false);
       } else {
-        appendMessage(`I don't have a specific answer for that yet. Try asking about: registration, EPIC, EVM, VVPAT, NOTA, security, or counting.<div style="margin-top: 0.5rem; font-size: 0.75rem; color: #718096; border-top: 1px solid var(--color-border); padding-top: 0.5rem;">Official resource: <a style="color: var(--color-saffron); font-weight: 600;" href="https://eci.gov.in">eci.gov.in</a></div>`, false);
+        appendMessage(`I don't have a specific answer for that yet. Try asking about: registration, EPIC, EVM, VVPAT, NOTA, security, or counting.<div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-muted); border-top: 1px solid var(--color-border); padding-top: 0.5rem;">Official resource: <a style="color: var(--color-saffron); font-weight: 600;" href="https://eci.gov.in">eci.gov.in</a></div>`, false);
       }
     }, 600);
   };

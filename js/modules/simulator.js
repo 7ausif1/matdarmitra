@@ -36,9 +36,9 @@ function renderProgress(step) {
         const active = STEP_KEYS.indexOf(step) >= i;
         const current = STEP_KEYS[i] === step;
         return `<div style="flex: 1; text-align: center;" role="listitem">
-          <div style="width: 2rem; height: 2rem; border-radius: 9999px; margin: 0 auto 0.25rem; display: flex; align-items: center; justify-content: center; font-weight: 700; ${active ? 'background-color: var(--color-primary); color: white;' : 'background-color: #e2e8f0; color: #718096;'}"
+          <div style="width: 2rem; height: 2rem; border-radius: 9999px; margin: 0 auto 0.25rem; display: flex; align-items: center; justify-content: center; font-weight: 700; ${active ? 'background-color: var(--color-primary); color: white;' : 'background-color: #e2e8f0; color: var(--color-text-muted);'}"
             aria-current="${current ? 'step' : 'false'}">${i + 1}</div>
-          <div style="${active ? 'color: var(--color-primary); font-weight: 600;' : 'color: #718096;'}">${escapeHTML(label)}</div>
+          <div style="${active ? 'color: var(--color-primary); font-weight: 600;' : 'color: var(--color-text-muted);'}">${escapeHTML(label)}</div>
         </div>`;
       }).join('')}
     </div>`;
@@ -47,14 +47,14 @@ function renderProgress(step) {
 export function renderSimulator(root) {
   if (!root) return;
 
-  const state = { step: 'id', choice: null };
+  const state = { step: 'id', choice: null, isVoting: false };
 
   const stepRenderers = {
     id: () => `
       <h3 class="mm-card-title">Step 1 — Identity Verification</h3>
       <p class="mm-text-muted" style="margin-bottom: 1rem;">The Polling Officer checks your name on the electoral roll and verifies your identity using your <strong>EPIC (Voter ID)</strong> or one of 11 alternate documents.</p>
       <div style="background-color: var(--color-paper); border: 1px solid var(--color-border); border-radius: var(--radius-sm); padding: 1rem; margin-bottom: 1rem;">
-        <div style="font-size: 0.75rem; color: #718096; margin-bottom: 0.25rem;">Acceptable documents (any ONE):</div>
+        <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 0.25rem;">Acceptable documents (any ONE):</div>
         <div style="font-size: 0.875rem;">EPIC · Aadhaar · Passport · Driving Licence · PAN Card · Service ID with photo · MGNREGA job card · Bank/Post Office passbook with photo · Health insurance smart card · Pension document with photo · Official ID cards issued to MPs/MLAs/MLCs</div>
       </div>
       <button id="show-id" class="btn btn-primary" style="width: 100%;">
@@ -78,10 +78,8 @@ export function renderSimulator(root) {
               C459.921,196.973,441.147,178.2,417.254,178.2z" 
               fill="#EBC1A4" stroke="#1A202C" stroke-width="8" stroke-linejoin="round"/>
             
-            <!-- Animated Ink Mark (Violet Line) -->
-            <path d="M212 15 L212 110" stroke="#4c1d95" stroke-width="12" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100">
-              <animate attributeName="stroke-dashoffset" values="100;0" dur="0.8s" begin="0.5s" fill="freeze" />
-            </path>
+            <!-- Ink Mark (Violet Line) -->
+            <path d="M212 15 L212 110" stroke="#4c1d95" stroke-width="12" stroke-linecap="round" />
           </g>
         </svg>
       </div>
@@ -128,12 +126,12 @@ export function renderSimulator(root) {
           <!-- Hidden overflow container for the slipping animation -->
           <div style="overflow: hidden; position: absolute; top: 100%; left: 2rem; right: 2rem; height: 300px; z-index: 5;">
             <!-- The Paper Slip itself -->
-            <div style="background: white; border: 1px solid #e2e8f0; padding: 1.5rem 1rem; font-family: monospace; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); animation: printSlip 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;">
-              <div style="text-align: center; color: #718096; font-size: 0.65rem; margin-bottom: 1rem; border-bottom: 1px dashed #cbd5e1; padding-bottom: 0.5rem;">VVPAT SLIP (FICTIONAL)</div>
+            <div style="background: white; border: 1px solid #e2e8f0; padding: 1.5rem 1rem; font-family: monospace; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+              <div style="text-align: center; color: var(--color-text-muted); font-size: 0.65rem; margin-bottom: 1rem; border-bottom: 1px dashed #cbd5e1; padding-bottom: 0.5rem;">VVPAT SLIP (FICTIONAL)</div>
               <div style="text-align: center; font-size: 2rem; margin-bottom: 0.5rem; height: 2.5rem; width: 2.5rem; margin: 0 auto;" aria-hidden="true">${getCandidateIcon(picked)}</div>
               <div style="text-align: center; font-weight: 700; font-size: 1.25rem;">${escapeHTML(picked.name)}</div>
-              <div style="text-align: center; color: #4a5568; font-size: 0.875rem;">${escapeHTML(picked.party)}</div>
-              <div style="text-align: center; color: #a0aec0; font-size: 0.65rem; margin-top: 1rem; border-top: 1px dashed #cbd5e1; padding-top: 0.5rem;">Serial: 001<br>${new Date().toLocaleDateString('en-IN')}</div>
+              <div style="text-align: center; color: var(--color-text-muted); font-size: 0.875rem;">${escapeHTML(picked.party)}</div>
+              <div style="text-align: center; color: var(--color-text-muted); font-size: 0.65rem; margin-top: 1rem; border-top: 1px dashed #cbd5e1; padding-top: 0.5rem;">Serial: 001<br>${new Date().toLocaleDateString('en-IN')}</div>
             </div>
           </div>
           
@@ -161,10 +159,10 @@ export function renderSimulator(root) {
             <i class="fa-solid fa-circle-check"></i>
           </div>
           <h3 style="font-weight: 800; color: var(--color-primary); font-size: 1.5rem; margin-bottom: 0.75rem;">Vote Successfully Cast</h3>
-          <p style="color: #4a5568; margin-bottom: 1.5rem;">Your vote for <strong>${escapeHTML(picked.name)}</strong> is now recorded on the EVM and the paper slip is sealed inside the VVPAT box.</p>
+          <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">Your vote for <strong>${escapeHTML(picked.name)}</strong> is now recorded on the EVM and the paper slip is sealed inside the VVPAT box.</p>
           <div style="background-color: var(--color-paper); border-left: 4px solid var(--color-primary); text-align: left; padding: 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; border-radius: var(--radius-sm);">
             <strong style="color: var(--color-primary); display: block; margin-bottom: 0.5rem;">What happens next?</strong>
-            <ul style="list-style-type: none; padding-left: 0; margin-top: 0.5rem; color: #4a5568; display: flex; flex-direction: column; gap: 0.75rem;">
+            <ul style="list-style-type: none; padding-left: 0; margin-top: 0.5rem; color: var(--color-text-muted); display: flex; flex-direction: column; gap: 0.75rem;">
               <li><span style="color: var(--color-primary); margin-right: 0.5rem;">•</span> After polling closes, the EVM is sealed with signatures from candidate agents</li>
               <li><span style="color: var(--color-primary); margin-right: 0.5rem;">•</span> It is transported under armed escort to a strongroom</li>
               <li><span style="color: var(--color-primary); margin-right: 0.5rem;">•</span> On counting day, totals are announced round-by-round in the presence of agents</li>
@@ -181,10 +179,10 @@ export function renderSimulator(root) {
           <i class="fa-solid fa-triangle-exclamation"></i>
         </div>
         <h3 style="font-weight: 800; color: #d97706; font-size: 1.5rem; margin-bottom: 0.75rem;">Report to Presiding Officer</h3>
-        <p style="color: #4a5568; margin-bottom: 1.5rem;">If the VVPAT slip does not match your choice, you have the right to complain to the Presiding Officer under <strong>Rule 49MA</strong>.</p>
+        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">If the VVPAT slip does not match your choice, you have the right to complain to the Presiding Officer under <strong>Rule 49MA</strong>.</p>
         <div style="background-color: #fffbeb; border-left: 4px solid #d97706; text-align: left; padding: 1.5rem; margin: 1.5rem 0; font-size: 0.95rem; border-radius: var(--radius-sm);">
           <strong style="color: #d97706; display: block; margin-bottom: 0.5rem;">The 49MA Process:</strong>
-          <ul style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.75rem; color: #4a5568;">
+          <ul style="list-style-type: none; padding-left: 0; display: flex; flex-direction: column; gap: 0.75rem; color: var(--color-text-muted);">
             <li><span style="color: #d97706; margin-right: 0.5rem;">•</span> Submit a written declaration regarding the mismatch</li>
             <li><span style="color: #d97706; margin-right: 0.5rem;">•</span> Cast a test vote in the presence of the Presiding Officer</li>
             <li><span style="color: #d97706; margin-right: 0.5rem;">•</span> If true, polling is stopped; if false, you may face prosecution</li>
@@ -197,7 +195,7 @@ export function renderSimulator(root) {
   const render = () => {
     const body = (stepRenderers[state.step] || stepRenderers.id)();
     root.innerHTML = `
-      <div class="sim-wrapper" style="max-width: 42rem; margin: 0 auto; opacity: 0; transform: translateY(20px);">
+      <div class="sim-wrapper" style="max-width: 42rem; margin: 0 auto;">
         ${state.step !== 'mismatch' ? renderProgress(state.step) : ''}
         <div class="mm-card glass">${body}</div>
         <div class="mm-text-muted" style="text-align: center; margin-top: 0.75rem;">
@@ -205,28 +203,6 @@ export function renderSimulator(root) {
         </div>
       </div>`;
     wire();
-
-    // GSAP Animation for rendering a new step
-    if (window.gsap) {
-      gsap.to(root.querySelector('.sim-wrapper'), {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out'
-      });
-
-      // Stagger animate EVM buttons if we are on the EVM step
-      if (state.step === 'evm') {
-        gsap.fromTo(root.querySelectorAll('.evm-anim-item'), 
-          { opacity: 0, x: -20 },
-          { opacity: 1, x: 0, stagger: 0.1, duration: 0.4, ease: 'back.out(1.5)', delay: 0.2 }
-        );
-      }
-    } else {
-      // Fallback if GSAP isn't loaded
-      const wrapper = root.querySelector('.sim-wrapper');
-      if (wrapper) { wrapper.style.opacity = '1'; wrapper.style.transform = 'none'; }
-    }
   };
 
   const advance = (to) => { state.step = to; render(); };

@@ -25,11 +25,11 @@ export function renderQuiz(root, questions) {
       <div class="mm-card glass">
         
         <!-- Progress Bar -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background-color: #edf2f7;" role="progressbar" aria-valuenow="${idx}" aria-valuemin="0" aria-valuemax="${questions.length}">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 6px; background-color: #edf2f7;" role="progressbar" aria-label="Quiz Progress" aria-valuenow="${idx}" aria-valuemin="0" aria-valuemax="${questions.length}">
           <div style="height: 100%; background-color: var(--color-saffron); width: ${(idx / questions.length) * 100}%; transition: width 0.5s ease-out;"></div>
         </div>
 
-        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: #718096; margin-bottom: 1.5rem; margin-top: 0.5rem;">
+        <div style="display: flex; justify-content: space-between; font-size: 0.875rem; color: var(--color-text-muted); margin-bottom: 1.5rem; margin-top: 0.5rem;">
           <span>Question ${idx + 1} of ${questions.length}</span>
           <span style="font-weight: 600; color: var(--color-navy);">Score: ${score}</span>
         </div>
@@ -77,7 +77,7 @@ export function renderQuiz(root, questions) {
     root.querySelector('#feedback').innerHTML = `
       <div style="padding: 1rem; border-radius: 0.5rem; background-color: ${correct ? '#f0fff4' : '#fffaf0'}; border-left: 4px solid ${correct ? '#38a169' : '#dd6b20'};">
         <strong style="color: ${correct ? '#2f855a' : '#c05621'}; font-size: 1.125rem;">${correct ? '✓ Correct!' : '✗ Not quite.'}</strong>
-        <p style="margin-top: 0.5rem; font-size: 0.875rem; color: #4a5568;">${escapeHTML(q.explanation)}</p>
+        <p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--color-text-muted);">${escapeHTML(q.explanation)}</p>
         <button id="next" class="btn btn-primary" style="margin-top: 1rem; width: 100%;">
           ${idx + 1 < questions.length ? 'Next Question →' : 'See Results →'}
         </button>

@@ -15,14 +15,14 @@ export function renderSecurity(root, items) {
   const renderDetail = (index) => {
     const item = items[index];
     detail.innerHTML = `
-      <div class="animate-fadeIn">
+      <div>
         <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem;">
           <div class="sidebar-icon" style="width: 4rem; height: 4rem; font-size: 2rem; background-color: var(--color-primary); color: white;">
             <i class="${item.icon}"></i>
           </div>
           <div>
             <h3 style="font-size: 2rem; color: var(--color-primary); font-weight: 800; margin: 0;">${escapeHTML(item.title)}</h3>
-            <div style="color: var(--color-secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Verified Safeguard</div>
+            <div style="color: var(--color-saffron-dark); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.875rem;">Verified Safeguard</div>
           </div>
         </div>
         

@@ -3,16 +3,10 @@
  * @description Renders the 5-stage voter's journey as a horizontal grid with a detail panel.
  */
 
-export async function renderJourney() {
-  const container = document.getElementById('journey-grid');
-  const detailPanel = document.getElementById('journey-detail');
-  if (!container || !detailPanel) return;
+export function renderJourney(container, detailPanel, steps) {
+  if (!container || !detailPanel || !steps) return;
 
   try {
-    const response = await fetch('./data/journey.json');
-    if (!response.ok) throw new Error('Failed to load journey data');
-    const steps = await response.json();
-
     container.innerHTML = '';
     
     // Render the 5 horizontal cards
@@ -20,10 +14,15 @@ export async function renderJourney() {
       const isFirst = index === 0;
       const stepNumber = index + 1;
       
-      const card = document.createElement('div');
-      // Added animate-on-scroll to animate the cards in
-      card.className = `mm-card glass journey-step-card animate-on-scroll ${isFirst ? 'active' : ''}`;
-      card.style.transitionDelay = `${index * 0.1}s`;
+      const card = document.createElement('button');
+      card.className = `mm-card glass journey-step-card ${isFirst ? 'active' : ''}`;
+      card.setAttribute('aria-label', `View details for Stage ${stepNumber}: ${step.title}`);
+      card.style.display = 'block';
+      card.style.width = '100%';
+      card.style.textAlign = 'left';
+      card.style.cursor = 'pointer';
+      card.style.border = 'none';
+      card.style.padding = '1.5rem';
 
       card.innerHTML = `
         <div class="journey-step-icon" style="background-color: ${isFirst ? 'var(--color-saffron)' : 'var(--color-navy)'};">
@@ -74,7 +73,7 @@ function renderDetailPanel(step, stepNumber, panel) {
   const safeguardsHtml = step.safeguards.map(sg => `<li>${sg}</li>`).join('');
 
   panel.innerHTML = `
-    <div class="journey-detail-panel animate-on-scroll">
+    <div class="journey-detail-panel">
       <div class="journey-detail-header">
         <div style="width: 50px; height: 50px; background-color: var(--color-saffron); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">
           <i class="${step.icon}"></i>
@@ -95,11 +94,5 @@ function renderDetailPanel(step, stepNumber, panel) {
     </div>
   `;
   
-  // Re-trigger the animation by adding the class since the observer only fires once on scroll
-  setTimeout(() => {
-    const detailPanelInner = panel.querySelector('.journey-detail-panel');
-    if (detailPanelInner) {
-      detailPanelInner.classList.add('is-visible');
-    }
-  }, 50);
+
 }
