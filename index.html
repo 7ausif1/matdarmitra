@@ -4,28 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
+  <!-- SEO & Performance Meta Tags -->
   <title>Matdar Mitra | Your Ultimate Voter Friend</title>
-  <meta name="description" content="Matdar Mitra helps you understand the Indian election process. Learn about EVMs, voter registration, and your civic duties.">
+  <meta name="description" content="Matdar Mitra helps you understand the Indian election process. Learn about EVMs, voter registration, and your civic duties with our interactive guide.">
   <meta name="theme-color" content="#FF9933">
   
+  <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🗳️</text></svg>">
   
+  <!-- Open Graph for Social Sharing -->
+  <meta property="og:title" content="Matdar Mitra | Your Ultimate Voter Friend">
+  <meta property="og:description" content="Interactive guide to understanding the Indian election process, EVMs, and voting.">
+  <meta property="og:type" content="website">
+  
+  <!-- Preload Critical Assets -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  
+  <!-- Stylesheets -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
   
+  <!-- CSS -->
   <link rel="stylesheet" href="./css/styles.min.css">
 </head>
 <body>
 
+  <!-- Skip link for Accessibility -->
+  <a href="#main-content" class="sr-only">Skip to main content</a>
+
+  <!-- Header & Navigation -->
   <header class="header">
     <div class="container nav">
       <div class="nav-brand">
         <span style="font-size: 2rem;" aria-hidden="true">🗳️</span>
         <span>Matdar Mitra</span>
       </div>
-      <button class="mobile-menu-btn" aria-label="Toggle Menu">&#9776;</button>
+      
+      <button class="mobile-menu-btn" aria-label="Toggle Menu">
+        &#9776;
+      </button>
+      
       <ul class="nav-links">
         <li><a href="#journey">Journey</a></li>
         <li><a href="#evm-guide">Simulator</a></li>
@@ -37,66 +58,103 @@
   </header>
 
   <main id="main-content">
+    
+    <!-- Hero Section -->
     <section class="hero hero-mesh-gradient">
       <div class="container hero-content" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2rem;">
         <div class="hero-text">
-          <h1 style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem;">Democracy, <br><span class="text-gradient">Simplified.</span></h1>
-          <p style="font-size: 1.25rem; color: #4a5568; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.6; margin-left: auto; margin-right: auto;">Understand the EVM, know your rights, and vote with confidence.</p>
+          <h1 style="font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Democracy, <br><span class="text-gradient">Simplified.</span></h1>
+          <p style="font-size: 1.25rem; color: #4a5568; margin-bottom: 2.5rem; max-width: 800px; line-height: 1.6; margin-left: auto; margin-right: auto;">Understand the EVM, know your rights, and vote with absolute confidence. Your step-by-step guide to the Indian election process.</p>
           <div class="hero-buttons" style="justify-content: center;">
-            <a href="#journey" class="btn btn-primary">Start Your Journey</a>
+            <a href="#journey" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.125rem;">Start Your Journey</a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Voter Journey Section -->
     <section id="journey" class="section">
       <div class="container">
         <h2 class="section-title">The Voter's Journey</h2>
+        <p class="section-subtitle">Experience the complete polling process—from marking the ink to verifying the slip.</p>
         <div id="journey-grid" class="journey-row-grid"></div>
         <div id="journey-detail" style="display: none; margin-top: 2rem;"></div>
       </div>
     </section>
 
-    <section id="evm-guide" class="section">
+    <!-- EVM Info Section -->
+    <section id="evm-guide" class="section" style="background-color: var(--color-white)">
       <div class="container" style="max-width: 900px; text-align: center;">
         <h2 class="section-title">EVM & VVPAT Simulator</h2>
-        <div id="simulator-root"></div>
+        <p style="color: #4a5568; margin-top: -2rem; margin-bottom: 3rem;">Experience the voting process firsthand with our interactive simulator.</p>
+        <div id="simulator-root" style="padding: 1rem 0;">
+          <p style="margin-bottom: 2rem;">Loading Simulator...</p>
+        </div>
       </div>
     </section>
 
+    <!-- Quiz Section -->
     <section id="quiz" class="section" style="background-color: var(--color-paper)">
       <div class="container">
         <h2 class="section-title">Test Your Knowledge</h2>
+        <p style="text-align: center; color: #4a5568; margin-top: -3rem; margin-bottom: 3rem;">Seven questions. Instant feedback. Share your score.</p>
         <div id="quiz-container" style="max-width: 800px; margin: 0 auto;"></div>
       </div>
     </section>
 
-    <section id="maps" class="section">
+    <!-- Maps Section -->
+    <section id="maps" class="section" style="background-color: var(--color-white)">
       <div class="container">
         <h2 class="section-title">Find Your Polling Booth</h2>
-        <div id="map-root" style="width: 100%; height: 450px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border);">
+        <p class="section-subtitle">Locate your nearest polling station and get directions instantly.</p>
+        <div id="map-root" style="width: 100%; height: 450px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border); box-shadow: var(--shadow-md);">
           <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background: #f1f5f9;">
-            <p>Initializing Map...</p>
+            <p style="margin-bottom: 1rem; color: var(--color-text-muted);">Enable Google Maps to see booths near you.</p>
+            <button class="btn btn-primary" id="enable-maps">Enable Google Maps</button>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Assistant Section -->
     <section id="assistant" class="section">
       <div class="container">
         <h2 class="section-title">Ask Matdar Mitra AI</h2>
+        <p class="section-subtitle">A smart assistant powered by Gemini to answer all your election-related queries.</p>
         <div id="assistant-container" style="max-width: 800px; margin: 0 auto;"></div>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2026 Matdar Mitra · Indian Election Guide</p>
+      <div class="footer-grid" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 4rem; padding-bottom: 3rem; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="footer-about">
+          <div class="nav-brand" style="margin-bottom: 1.5rem; color: var(--color-white); font-size: 1.25rem;">
+            <span style="font-size: 1.5rem;" aria-hidden="true">🗳️</span>
+            <span>Matdar Mitra</span>
+          </div>
+          <p style="color: rgba(255,255,255,0.7); font-size: 1rem; line-height: 1.7; max-width: 500px;">
+            This is a non-partisan educational project. Always verify with the Election Commission of India before acting on any information.
+          </p>
+        </div>
+        <div class="footer-sources">
+          <h4 style="color: var(--color-white); margin-bottom: 1.5rem; font-size: 1.125rem; font-weight: 700;">Official Sources</h4>
+          <ul style="list-style: none; padding: 0; color: rgba(255,255,255,0.5); font-size: 0.95rem; display: grid; gap: 0.75rem;">
+            <li>Election Commission of India (eci.gov.in)</li>
+            <li>Voter Helpline 1950</li>
+            <li>Representation of the People Act, 1951</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom" style="padding-top: 2rem; color: rgba(255,255,255,0.7); font-size: 0.875rem; display: flex; justify-content: space-between; align-items: center;">
+        <p>&copy; 2026 Matdar Mitra · Open-source under MIT License</p>
+      </div>
     </div>
   </footer>
 
-  <!-- Final Bundled Script -->
-  <script src="./js/app.bundle.js" defer></script>
+  <!-- Scripts with Cache Buster -->
+  <script src="./js/app.js?v=1.0.2" type="module" defer></script>
 </body>
 </html>
