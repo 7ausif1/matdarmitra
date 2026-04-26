@@ -1,6 +1,5 @@
 /**
  * Matdar Mitra - Main Application Logic
- * Pure Vanilla JS for maximum performance (100/100 Lighthouse)
  */
 
 import { renderJourney } from './modules/journey.js';
@@ -8,9 +7,10 @@ import { renderSimulator } from './modules/simulator.js';
 import { renderSecurity } from './modules/security.js';
 import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
+import { initMaps } from './modules/maps.js';
+import { CONFIG } from './config.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-
   initStickyHeader();
   initMobileMenu();
   loadApplicationData();
@@ -27,7 +27,7 @@ async function loadApplicationData() {
       renderJourney(journeyGrid, journeyDetail, journeyData);
     }
 
-    // Initialize Simulator (GSAP embedded inside module)
+    // Initialize Simulator
     const simulatorRoot = document.getElementById('simulator-root');
     if (simulatorRoot) {
       renderSimulator(simulatorRoot);
@@ -54,21 +54,33 @@ async function loadApplicationData() {
     if (assistantContainer) {
       renderAssistant(assistantContainer);
     }
-    // Re-initialize scroll animations now that dynamic content is in the DOM
+
+    // Initialize Maps (Booth Finder)
+    const mapRoot = document.getElementById('map-root');
+    const enableMapsBtn = document.getElementById('enable-maps');
+    
+    if (mapRoot) {
+      // Auto-initialize with key from config
+      initMaps(mapRoot, CONFIG.GOOGLE_MAPS_API_KEY);
+    }
+
+    if (enableMapsBtn) {
+      enableMapsBtn.addEventListener('click', () => {
+        const key = prompt("Please enter your Google Maps API Key:", CONFIG.GOOGLE_MAPS_API_KEY);
+        if (key) {
+          initMaps(mapRoot, key);
+        }
+      });
+    }
     
   } catch (err) {
     console.error("Failed to load application data:", err);
   }
 }
 
-/**
- * Handle sticky header visual changes on scroll
- */
 function initStickyHeader() {
   const header = document.querySelector('.header');
-  
   if (!header) return;
-
   const handleScroll = () => {
     if (window.scrollY > 50) {
       header.classList.add('scrolled');
@@ -76,25 +88,15 @@ function initStickyHeader() {
       header.classList.remove('scrolled');
     }
   };
-
-  // Initial check
   handleScroll();
-  
-  // Listen for scroll with passive true for better performance
   window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
-/**
- * Basic mobile menu toggle (placeholder for full implementation)
- */
 function initMobileMenu() {
   const menuBtn = document.querySelector('.mobile-menu-btn');
   const navLinks = document.querySelector('.nav-links');
-
   if (!menuBtn || !navLinks) return;
-
   menuBtn.addEventListener('click', () => {
-    // In a full implementation, this would toggle a mobile menu modal or slide-out
     const isVisible = navLinks.style.display === 'flex';
     navLinks.style.display = isVisible ? 'none' : 'flex';
     navLinks.style.flexDirection = 'column';

@@ -14,4 +14,13 @@ builder-skills/
 
 # Build and deploy
 node_modules/
+dist/
 .dockerignore
+
+# API Keys & Sensitive Data (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+js/config.js
