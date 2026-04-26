@@ -55,14 +55,30 @@ async function loadApplicationData() {
       renderAssistant(assistantContainer);
     }
     // Re-initialize scroll animations now that dynamic content is in the DOM
-
+    // Hide preloader
+    hidePreloader();
     
   } catch (err) {
     console.error("Failed to load application data:", err);
+    hidePreloader(); // Hide even on error
   }
 }
 
-
+/**
+ * Hide the application preloader
+ */
+function hidePreloader() {
+  const preloader = document.getElementById('preloader');
+  if (preloader) {
+    preloader.classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    
+    // Remove from DOM after transition
+    setTimeout(() => {
+      preloader.remove();
+    }, 500);
+  }
+}
 
 /**
  * Handle sticky header visual changes on scroll

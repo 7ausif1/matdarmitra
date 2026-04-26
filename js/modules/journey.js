@@ -76,7 +76,7 @@ function renderDetailPanel(step, stepNumber, panel) {
     <div class="journey-detail-panel">
       <div class="journey-detail-header">
         <div style="width: 50px; height: 50px; background-color: var(--color-saffron); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: bold;">
-          <i class="${step.icon}"></i>
+          <span class="material-icons-outlined">${step.icon}</span>
         </div>
         <h3>${step.title}</h3>
       </div>
