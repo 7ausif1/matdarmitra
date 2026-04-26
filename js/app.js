@@ -1,5 +1,6 @@
 /**
  * Matdar Mitra - Main Application Logic
+ * Now using environment variables injected at build time.
  */
 
 import { renderJourney } from './modules/journey.js';
@@ -9,11 +10,9 @@ import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
 import { initMaps } from './modules/maps.js';
 
-// Hardcoded keys for Hackathon Submission
-// Maps key from Google Cloud
-const GOOGLE_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
-// Gemini key from Google AI Studio
-const GEMINI_API_KEY = "AIzaSyDLhCicizu1YK2SYH42T61-JW1bmVUGdxA";
+// These variables will be replaced by esbuild during npm run build
+const GOOGLE_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadApplicationData() {
   try {
-    // Fetch Journey Data
     const journeyResp = await fetch('./data/journey.json');
     const journeyData = await journeyResp.json();
     const journeyGrid = document.getElementById('journey-grid');
@@ -32,39 +30,29 @@ async function loadApplicationData() {
       renderJourney(journeyGrid, journeyDetail, journeyData);
     }
 
-    // Initialize Simulator
     const simulatorRoot = document.getElementById('simulator-root');
-    if (simulatorRoot) {
-      renderSimulator(simulatorRoot);
-    }
+    if (simulatorRoot) renderSimulator(simulatorRoot);
 
-    // Fetch and render Security
     const securityResp = await fetch('./data/security.json');
     const securityData = await securityResp.json();
     const securitySidebar = document.getElementById('security-sidebar');
-    if (securitySidebar) {
-      renderSecurity(securitySidebar, securityData);
-    }
+    if (securitySidebar) renderSecurity(securitySidebar, securityData);
 
-    // Fetch and render Quiz
     const quizResp = await fetch('./data/quiz.json');
     const quizData = await quizResp.json();
     const quizContainer = document.getElementById('quiz-container');
-    if (quizContainer) {
-      renderQuiz(quizContainer, quizData);
-    }
+    if (quizContainer) renderQuiz(quizContainer, quizData);
 
-    // Initialize Assistant
     const assistantContainer = document.getElementById('assistant-container');
     if (assistantContainer) {
-      // Pass the dedicated Gemini key to assistant
+      // Use the injected Gemini key
       window.GEMINI_API_KEY = GEMINI_API_KEY;
       renderAssistant(assistantContainer);
     }
 
-    // Initialize Maps (Booth Finder)
     const mapRoot = document.getElementById('map-root');
     if (mapRoot) {
+      // Use the injected Maps key
       initMaps(mapRoot, GOOGLE_API_KEY);
     }
     
@@ -77,11 +65,8 @@ function initStickyHeader() {
   const header = document.querySelector('.header');
   if (!header) return;
   const handleScroll = () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
+    if (window.scrollY > 50) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
   };
   handleScroll();
   window.addEventListener('scroll', handleScroll, { passive: true });

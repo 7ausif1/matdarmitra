@@ -1,4 +1,11 @@
 {
+  "name": "matdar-mitra",
+  "version": "1.0.0",
+  "description": "Indian Election Assistant",
+  "scripts": {
+    "build": "esbuild js/app.js --bundle --minify --outfile=js/app.bundle.js --define:process.env.GOOGLE_MAPS_API_KEY=\"'AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI'\" --define:process.env.GEMINI_API_KEY=\"'AIzaSyDLhCicizu1YK2SYH42T61-JW1bmVUGdxA'\"",
+    "dev": "esbuild js/app.js --bundle --outfile=js/app.bundle.js --watch --define:process.env.GOOGLE_MAPS_API_KEY=\"'AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI'\" --define:process.env.GEMINI_API_KEY=\"'AIzaSyDLhCicizu1YK2SYH42T61-JW1bmVUGdxA'\""
+  },
   "devDependencies": {
     "esbuild": "^0.28.0"
   }

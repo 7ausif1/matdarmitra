@@ -1,74 +1,52 @@
 /**
  * @module ai-service
- * @description Integration with Google Gemini API for the Matdar Mitra assistant.
+ * @description Ultra-Robust Integration with Google Gemini API for Matdar Mitra.
  */
 
-// Switching to gemini-pro (1.0) which has the highest compatibility across all API keys and regions
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
-
-/**
- * System prompt to give Gemini the context of an Indian Election Assistant.
- */
-const SYSTEM_PROMPT = `
-You are "Matdar Mitra", an expert AI assistant for the Indian Election process. 
-Your goal is to provide accurate, non-partisan, and helpful information to Indian voters.
-Base your answers on Election Commission of India (ECI) guidelines.
-
-Key Context:
-- EVMs are standalone, secure devices.
-- VVPAT allows voters to verify their vote.
-- Registration is via Form 6.
-- MCC (Model Code of Conduct) ensures fair play.
-- 12 identity documents are accepted (EPIC, Aadhaar, etc.).
-
-Tone: Professional, helpful, and simplified. 
-If you don't know an answer, refer the user to the official ECI website (eci.gov.in) or the Voter Helpline (1950).
-Avoid political opinions or endorsing any specific party/candidate.
-`;
-
-/**
- * Sends a message to the Gemini API.
- * @param {string} prompt - User's question.
- * @param {string} apiKey - Google Cloud API Key.
- * @returns {Promise<string>} - AI Response.
- */
 export async function getGeminiResponse(prompt, apiKey) {
-  if (!apiKey) {
-    throw new Error('API Key is missing. Please provide a valid Google Cloud API Key.');
-  }
+  if (!apiKey) throw new Error('API Key is missing.');
 
-  try {
-    const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [
-          {
-            parts: [
-              { text: `${SYSTEM_PROMPT}\n\nUser Question: ${prompt}` }
-            ]
-          }
-        ],
-        generationConfig: {
-          temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 1024,
-        }
-      })
-    });
+  const SYSTEM_PROMPT = `You are "Matdar Mitra", an expert Indian Election Assistant. Provide accurate, non-partisan info based on ECI guidelines.`;
+  
+  // Exhaustive list of models and versions to try
+  const attempts = [
+    { model: 'gemini-1.5-flash', version: 'v1beta' },
+    { model: 'gemini-1.5-flash-001', version: 'v1beta' },
+    { model: 'gemini-1.5-flash-002', version: 'v1beta' },
+    { model: 'gemini-1.5-flash-latest', version: 'v1beta' },
+    { model: 'gemini-1.5-pro', version: 'v1beta' },
+    { model: 'gemini-pro', version: 'v1beta' },
+    { model: 'gemini-1.5-flash', version: 'v1' }
+  ];
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error?.message || 'Failed to fetch AI response');
+  let lastError = null;
+
+  for (const attempt of attempts) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/${attempt.version}/models/${attempt.model}:generateContent?key=${apiKey}`;
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: `${SYSTEM_PROMPT}\n\nUser Question: ${prompt}` }] }],
+          generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (text) return text;
+      } else {
+        const err = await response.json();
+        console.warn(`Attempt failed for ${attempt.model}:`, err.error?.message);
+        lastError = err.error?.message;
+      }
+    } catch (e) {
+      lastError = e.message;
     }
-
-    const data = await response.json();
-    return data.candidates[0]?.content?.parts[0]?.text || 'I am sorry, I could not generate a response.';
-  } catch (error) {
-    console.error('AI Service Error:', error);
-    throw error;
   }
+
+  throw new Error(`AI Connection Failed: ${lastError}. Please verify your API Key in Google AI Studio.`);
 }
