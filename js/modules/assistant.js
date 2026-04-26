@@ -4,7 +4,6 @@
  */
 import { escapeHTML } from './security-utils.js';
 import { getGeminiResponse } from './ai-service.js';
-import { CONFIG } from '../config.js';
 
 // Fallback FAQ for offline/no-key scenarios
 const FAQ = [
@@ -18,8 +17,8 @@ const FAQ = [
     a: 'NOTA allows you to reject all candidates in an election while still participating.' }
 ];
 
-// Use key from central config
-let API_KEY = CONFIG.GEMINI_API_KEY || "";
+// Use global key set by app.js or empty fallback
+let API_KEY = window.GEMINI_API_KEY || "";
 
 function findFAQ(question) {
   const lower = question.toLowerCase();
@@ -121,11 +120,12 @@ export function renderAssistant(root) {
     const loader = appendLoading();
 
     try {
-      if (API_KEY) {
-        const response = await getGeminiResponse(question, API_KEY);
+      // Re-check API_KEY in case it was updated via UI or set globally
+      const currentKey = API_KEY || window.GEMINI_API_KEY;
+      if (currentKey) {
+        const response = await getGeminiResponse(question, currentKey);
         loader.innerHTML = `<strong>Answer:</strong> ${escapeHTML(response)}<div style="margin-top: 0.5rem; font-size: 0.75rem; color: var(--color-text-muted); border-top: 1px solid var(--color-border); padding-top: 0.5rem;">Source: Matdar Mitra AI (Gemini 1.5 Flash)</div>`;
       } else {
-        // Fallback to local FAQ
         const hit = findFAQ(question);
         setTimeout(() => {
           if (hit) {
@@ -148,6 +148,7 @@ export function renderAssistant(root) {
   closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
   saveKeyBtn.addEventListener('click', () => {
     API_KEY = apiKeyInput.value.trim();
+    window.GEMINI_API_KEY = API_KEY;
     modal.style.display = 'none';
   });
 

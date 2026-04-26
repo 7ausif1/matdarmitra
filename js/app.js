@@ -8,7 +8,10 @@ import { renderSecurity } from './modules/security.js';
 import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
 import { initMaps } from './modules/maps.js';
-import { CONFIG } from './config.js';
+
+// Hardcoded keys for Hackathon Submission (to ensure live site works)
+const GOOGLE_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
+const GEMINI_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
 
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
@@ -52,25 +55,15 @@ async function loadApplicationData() {
     // Initialize Assistant
     const assistantContainer = document.getElementById('assistant-container');
     if (assistantContainer) {
+      // Pass the hardcoded key to assistant
+      window.GEMINI_API_KEY = GEMINI_API_KEY;
       renderAssistant(assistantContainer);
     }
 
     // Initialize Maps (Booth Finder)
     const mapRoot = document.getElementById('map-root');
-    const enableMapsBtn = document.getElementById('enable-maps');
-    
     if (mapRoot) {
-      // Auto-initialize with key from config
-      initMaps(mapRoot, CONFIG.GOOGLE_MAPS_API_KEY);
-    }
-
-    if (enableMapsBtn) {
-      enableMapsBtn.addEventListener('click', () => {
-        const key = prompt("Please enter your Google Maps API Key:", CONFIG.GOOGLE_MAPS_API_KEY);
-        if (key) {
-          initMaps(mapRoot, key);
-        }
-      });
+      initMaps(mapRoot, GOOGLE_API_KEY);
     }
     
   } catch (err) {
