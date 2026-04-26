@@ -3,8 +3,8 @@
  * @description Integration with Google Gemini API for the Matdar Mitra assistant.
  */
 
-// Using v1 endpoint for better compatibility with AI Studio keys
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent';
+// Using gemini-1.5-flash-latest which is a more robust alias for newer API keys
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent';
 
 /**
  * System prompt to give Gemini the context of an Indian Election Assistant.
