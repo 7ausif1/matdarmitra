@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Matdar Mitra - Journey Timeline Options</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/styles.css">
+  <style>
+    body { background-color: #f8fafc; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+    .option-header { background: #1a1a1a; color: white; padding: 1rem; text-align: center; font-family: monospace; font-size: 1.5rem; font-weight: bold; }
+    .showcase-container { max-width: 900px; margin: 4rem auto; padding: 0 1rem; }
+
+    /* OPTION 1: Vertical Stepper */
+    .timeline-v { position: relative; border-left: 3px solid var(--color-border); margin-left: 20px; padding-left: 30px; }
+    .timeline-v-item { position: relative; margin-bottom: 2rem; }
+    .timeline-v-item:last-child { margin-bottom: 0; }
+    .timeline-v-dot { position: absolute; left: -46px; top: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--color-navy); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 4px solid #f8fafc; }
+    .timeline-v-item:hover .timeline-v-dot { background: var(--color-saffron); transform: scale(1.1); transition: 0.2s; }
+
+    /* OPTION 2: Horizontal Tabs */
+    .timeline-h-nav { display: flex; justify-content: space-between; position: relative; margin-bottom: 2rem; }
+    .timeline-h-nav::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 3px; background: var(--color-border); z-index: 1; transform: translateY(-50%); }
+    .timeline-h-step { position: relative; z-index: 2; width: 40px; height: 40px; border-radius: 50%; background: white; border: 3px solid var(--color-border); display: flex; align-items: center; justify-content: center; font-weight: bold; cursor: pointer; color: var(--color-ink); transition: 0.2s; }
+    .timeline-h-step.active { border-color: var(--color-saffron); background: var(--color-saffron); color: white; transform: scale(1.1); }
+    .timeline-h-step:hover { border-color: var(--color-navy); }
+
+    /* OPTION 3: Alternating Zig-Zag */
+    .timeline-z { position: relative; padding: 2rem 0; }
+    .timeline-z::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; background: var(--color-border); transform: translateX(-50%); }
+    .timeline-z-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem; width: 100%; position: relative; }
+    .timeline-z-item:nth-child(even) { flex-direction: row-reverse; }
+    .timeline-z-content { width: 45%; }
+    .timeline-z-dot { width: 24px; height: 24px; border-radius: 50%; background: var(--color-saffron); position: absolute; left: 50%; transform: translateX(-50%); border: 4px solid #f8fafc; z-index: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- OPTION 1 -->
+  <div class="option-header">OPTION 1: The Vertical Stepper (Clean & Intuitive)</div>
+  <div class="showcase-container">
+    <p style="text-align:center; color:#4a5568; margin-bottom: 2rem;">A classic, highly readable vertical line. Excellent for mobile devices.</p>
+    
+    <div class="timeline-v">
+      
+      <div class="timeline-v-item">
+        <div class="timeline-v-dot">1</div>
+        <div class="mm-card glass" style="cursor: pointer;">
+          <h3 class="mm-card-title">📝 Registration & Preparation</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem;">Verify your name on the electoral roll and ensure you have an EPIC (Voter ID) or valid alternate document.</p>
+        </div>
+      </div>
+
+      <div class="timeline-v-item">
+        <div class="timeline-v-dot">2</div>
+        <div class="mm-card glass" style="cursor: pointer; border-left: 4px solid var(--color-saffron);">
+          <h3 class="mm-card-title">🏢 Entering the Polling Station</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem;">The First Polling Officer checks your ID. The Second applies indelible ink to your finger and issues a voter slip.</p>
+          <div style="margin-top: 1rem; padding: 0.75rem; background: #fffbeb; border-radius: 0.25rem; font-size: 0.875rem;">
+            <strong>Safeguard:</strong> Indelible ink prevents multiple voting. Candidates' agents are present to challenge false identities.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-v-item">
+        <div class="timeline-v-dot">3</div>
+        <div class="mm-card glass" style="cursor: pointer;">
+          <h3 class="mm-card-title">🗳️ Casting Your Vote</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem;">Proceed to the voting compartment and press the blue button next to your candidate on the EVM Ballot Unit.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- OPTION 2 -->
+  <div class="option-header">OPTION 2: Horizontal Progress Tracker (App-like)</div>
+  <div class="showcase-container">
+    <p style="text-align:center; color:#4a5568; margin-bottom: 2rem;">Similar to a checkout process. Compact layout with details appearing below.</p>
+    
+    <div class="timeline-h">
+      <div class="timeline-h-nav">
+        <div class="timeline-h-step">1</div>
+        <div class="timeline-h-step active">2</div>
+        <div class="timeline-h-step">3</div>
+        <div class="timeline-h-step">4</div>
+        <div class="timeline-h-step">5</div>
+      </div>
+      
+      <div class="mm-card glass" style="border-top: 4px solid var(--color-saffron);">
+        <h3 class="mm-card-title">🏢 Stage 2: Entering the Polling Station</h3>
+        <p class="mm-text-muted" style="margin-top: 1rem;">The First Polling Officer checks your ID against the electoral roll. The Second Polling Officer applies indelible ink to your left index finger, asks you to sign the register (Form 17A), and issues a voter slip. The Third Polling Officer collects this slip and enables the EVM for you.</p>
+        <div style="margin-top: 1rem; padding: 1rem; background: #f0fff4; border-left: 4px solid var(--color-green); border-radius: 0.25rem;">
+          <strong>Safeguard:</strong> The indelible ink prevents multiple voting. Candidates' polling agents sit right there to verify identities and can challenge bogus voters.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPTION 3 -->
+  <div class="option-header">OPTION 3: The Zig-Zag Storyline (Desktop Premium)</div>
+  <div class="showcase-container">
+    <p style="text-align:center; color:#4a5568; margin-bottom: 2rem;">A highly engaging, visual layout where cards alternate left and right along a central line.</p>
+    
+    <div class="timeline-z">
+      
+      <div class="timeline-z-item">
+        <div class="timeline-z-content mm-card glass">
+          <h3 class="mm-card-title">1. Registration</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem; font-size: 0.875rem;">Verify your name on the electoral roll and ensure you have an EPIC (Voter ID).</p>
+        </div>
+        <div class="timeline-z-dot"></div>
+        <div class="timeline-z-content"></div>
+      </div>
+
+      <div class="timeline-z-item">
+        <div class="timeline-z-content mm-card glass" style="border-right: 4px solid var(--color-saffron);">
+          <h3 class="mm-card-title">2. Polling Station</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem; font-size: 0.875rem;">Identity is checked, indelible ink is applied to your finger, and you sign the register.</p>
+        </div>
+        <div class="timeline-z-dot" style="background: var(--color-navy);"></div>
+        <div class="timeline-z-content"></div>
+      </div>
+
+      <div class="timeline-z-item">
+        <div class="timeline-z-content mm-card glass">
+          <h3 class="mm-card-title">3. Casting Vote</h3>
+          <p class="mm-text-muted" style="margin-top: 0.5rem; font-size: 0.875rem;">Press the blue button on the EVM Ballot Unit inside the voting compartment.</p>
+        </div>
+        <div class="timeline-z-dot"></div>
+        <div class="timeline-z-content"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="height: 100px;"></div>
+</body>
+</html>
