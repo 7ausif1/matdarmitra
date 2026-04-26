@@ -9,9 +9,11 @@ import { renderQuiz } from './modules/quiz.js';
 import { renderAssistant } from './modules/assistant.js';
 import { initMaps } from './modules/maps.js';
 
-// Hardcoded keys for Hackathon Submission (to ensure live site works)
+// Hardcoded keys for Hackathon Submission
+// Maps key from Google Cloud
 const GOOGLE_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
-const GEMINI_API_KEY = "AIzaSyD-YqlVlfD4jbkvNI3d5mWIGetGLmfYdXI";
+// Gemini key from Google AI Studio
+const GEMINI_API_KEY = "AIzaSyDLhCicizu1YK2SYH42T61-JW1bmVUGdxA";
 
 document.addEventListener('DOMContentLoaded', () => {
   initStickyHeader();
@@ -55,7 +57,7 @@ async function loadApplicationData() {
     // Initialize Assistant
     const assistantContainer = document.getElementById('assistant-container');
     if (assistantContainer) {
-      // Pass the hardcoded key to assistant
+      // Pass the dedicated Gemini key to assistant
       window.GEMINI_API_KEY = GEMINI_API_KEY;
       renderAssistant(assistantContainer);
     }
